@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=stylesheet href="css/main.css">
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        <div class="nav-header">
+    </nav>
     <h1>PHP wow</h1>
     <div>
+        <form>
+            <input type="text" name="zoekveld"
+        </form>
         <?php
         
         /* Connect to a MySQL database using driver invocation */
