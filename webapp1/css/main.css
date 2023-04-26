@@ -8,11 +8,12 @@
     height: 80px;
     background-color: aqua;
     display: flex;
+    justify-content: center;
 }
-.nav-name{
-    width: 100%;
+.main-title{
+    width: 75%;
     height: 80px;
-    background-color: blue;
+    background-color: red;
     display: flex;
     align-items: center;
     justify-content: center;
