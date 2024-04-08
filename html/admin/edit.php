@@ -5,6 +5,17 @@ include_once("../connectie.php");
 /** 
  * @var PDO $pdo 
 */
+session_start();
+if(isset($_SESSION['username'])){
+} else {
+    header('Location: ../login.php');
+}
+
+$sql = "SELECT * FROM menu WHERE ID = :id";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(":id", $_GET['id']);
+$stmt->execute();
+$result = $stmt->fetch();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +30,11 @@ include_once("../connectie.php");
         <div class="edit-con">
     <form class="edit-form" method="post">
         <?php
-        echo "Je gaat product ".$_GET['id'].", bijwerken";
+        echo "Je gaat product ".$_GET['id'].", ".$result['naam']." bijwerken";
         ?>
-        <input class="form-txt" type="text" name="naam" value="" placeholder="Naam">
-        <input class="form-txt" type="text" name="desc" value="" placeholder="Beschrijving">
-        <input class="form-txt" type="text" name="prijs" value="" placeholder="*4.20*">
+        <input class="form-txt" type="text" name="naam" value="<?php echo $result['naam'] ?>" placeholder="Naam">
+        <input class="form-txt" type="text" name="desc" value="<?php echo $result['beschrijving'] ?>" placeholder="Beschrijving">
+        <input class="form-txt" type="text" name="prijs" value="<?php echo $result['prijs'] ?>" placeholder="Prijs">
         <input class="submit" type="submit" name="submit" value="Aanpassen">
         <?php
         if(isset($_POST['submit'])){

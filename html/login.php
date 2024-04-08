@@ -1,5 +1,10 @@
 <?php 
     ob_start();
+    include_once("connectie.php");
+    /**
+     * @var PDO $pdo
+     */
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,8 +39,8 @@
 </html>
 <?php
     if(isset($_POST['login'])){
-        if($_POST['username'] == "admin" and $_POST['password'] == "adminpass"){
-            echo '<div class=login-message>'."Gebruikersnaam en wachtwoord zijn goed!".'</div>';
+        if($_POST['username'] == "admin" and $_POST['password'] == "passwd"){
+            $_SESSION['username'] = "admin";
             Header('Location: admin/index.php');
             exit();
         }

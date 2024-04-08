@@ -5,6 +5,11 @@ include_once("../connectie.php");
 /** 
  * @var PDO $pdo 
 */
+session_start();
+if(isset($_SESSION['username'])){
+} else {
+    header('Location: ../login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,8 +28,8 @@ include_once("../connectie.php");
         ?>
         <input class="form-txt" type="text" name="naam" value="" placeholder="Naam">
         <input class="form-txt" type="text" name="desc" value="" placeholder="Beschrijving">
-        <input class="form-txt" type="text" name="prijs" value="" placeholder="*4.20*">
-        <input class="submit" type="submit" name="submit" value="Aanpassen">
+        <input class="form-txt" type="text" name="prijs" value="" placeholder="Prijs">
+        <input class="submit" type="submit" name="submit" value="Toevoegen">
         <?php
         if(isset($_POST['submit'])){
             $sql = "INSERT INTO menu(naam, beschrijving, prijs) VALUES (:naam, :beschrijving, :prijs)";

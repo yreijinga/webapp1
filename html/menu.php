@@ -28,19 +28,31 @@
         </nav>
     </header>
     <main>
+        <div class="search-box">
+            <input class="search-bar" type="text" name="search" id="" placeholder="Zoeken...">
+            <input class="search-bttn" type="submit" value="Zoeken">
+        </div>
         <?php 
         $sql = "SELECT * FROM menu";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         ?>
         <div class="menu-list">
-            <div class="menu-item">
-                <?php
+            <?php
                 while($result = $stmt->fetch()){
-                    echo '<div class=product-id>' .$result['id']. '</div>';
+                    
+                    echo '<div class="menu-item">';
+                        echo '<div class="item-left">';
+                            echo '<div class="item-txt item-name">' . $result['naam'].'</div>';
+                            echo '<div class="item-txt item-desc">' . $result['beschrijving'].'</div>';
+                        echo '</div>';
+                        echo '<div class="item-right">';
+                            echo '€ ' . $result['prijs'];
+                        echo '</div>';
+                    echo '</div>';
                 }
                 ?>
-            </div>
+            
         </div>
     </main>
     <footer>

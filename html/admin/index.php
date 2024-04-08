@@ -2,6 +2,11 @@
 /** 
  * @var PDO $pdo 
 */
+session_start();
+if(isset($_SESSION['username'])){
+} else {
+    header('Location: ../login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +22,7 @@
         <div class="add-bttn">
             <a href="add.php">Product toevoegen</a>
         </div>
-        <div class="menu-container">
+        <div class="adm-menu-con">
         <table>
             <thead>
                 <tr>
@@ -47,6 +52,11 @@
     ?>
     </table>
         </div>
+    </div>
+    <div class="logout-container">
+        <a href="logout.php">
+            <div class="logout-bttn">Uitloggen</div>
+        </a>
     </div>
 </body>
 </html>
