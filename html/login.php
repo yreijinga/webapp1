@@ -38,14 +38,36 @@
 </body>
 </html>
 <?php
-    if(isset($_POST['login'])){
-        if($_POST['username'] == "admin" and $_POST['password'] == "passwd"){
-            $_SESSION['username'] = "admin";
-            Header('Location: admin/index.php');
-            exit();
-        }
-        else {
-            echo '<div class=login-message>'."Gebruikersnaam en wachtwoord zijn fout!".'</div>';
-        }
-    }
+$sql = "SELECT * FROM users WHERE username = :user AND passwd = :passwd";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(":user", $_POST['username']);
+$stmt->bindParam(":passwd", $_POST['password']);
+$stmt->execute();
+$user = $stmt->fetch();
+
+if(isset($_POST['login'])){
+if($user && $user['isAdmin'] == true){
+    $_SESSION['loggedin'] = true;
+    $_SESSION['loginname'] = $_POST["username"];
+    header('Location: index.php');
+} else {
+    $_SESSION['loggedin'] = true;
+    header('Location: index.php');
+}
+}
+
+
+//    if(isset($_POST['login'])){
+//        if($_POST['username'] == $result['username'] and $_POST['password'] == $result['password'] and $result['isAdmin'] == true){
+//            $_SESSION['username'] = "admin";
+//            echo '<div class=login-message>'."Wel admin".'</div>';
+//            
+//            
+//        } else if($_POST['username'] == $result['username'] and $_POST['password'] == $result['password'] and $result['isAdmin'] == false) {
+//            
+//            echo '<div class=login-message>'."Geen admin".'</div>';
+//        } else {
+//            echo '<div class=login-message>'."Gebruiker bestaat niet!".'</div>';
+//        }
+//    }
 ?>

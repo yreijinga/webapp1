@@ -83,8 +83,8 @@ nav{
 }
 .menu-list{
   display: flex;
+  flex-wrap: wrap; 
   width: 100%;
-  height: 250px;
   background-color: #e84a4a;
   flex-direction: row;
   justify-content: space-around;
@@ -92,8 +92,8 @@ nav{
 }
 .menu-item{
   display: flex;
-  width: 30%;
-  height: 150px;
+  width: 25%;
+  height: 100px;
   border: 3px solid #d3d3d3;
   border-radius: 10px;
   align-items: center;
@@ -180,7 +180,7 @@ nav{
 .adminpanel{
     display: flex;
     width: 100%;
-    height: 200px;
+    min-height: 200px;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
@@ -188,7 +188,7 @@ nav{
 .adm-menu-con{
     display: flex;
     width: 100%;
-    height: 500px;
+    min-height: 200px;
 }
 table {
     border-collapse: collapse;
@@ -203,6 +203,9 @@ table {
     background-color: #f2f2f2;
   }
   
+  tr{
+    height: 50px;
+  }
   tr:nth-child(even) {
     background-color: #f2f2f2;
   }
