@@ -30,9 +30,28 @@
     <main>
         <div class="search-box">
             <input class="search-bar" type="text" name="search" id="" placeholder="Zoeken...">
-            <input class="search-bttn" type="submit" value="Zoeken">
+            <input class="search-bttn" type="submit" name="search" value="Zoeken">
         </div>
-        <?php 
+        <?php
+        if(isset($_POST['search'])){
+        $searchQuery = "SELECT * FROM menu WHERE naam LIKE :zoekinput";
+        $stmt = $pdo->prepare($searchQuery);
+        $var = "%" . $_GET['naam'] . "%";
+        $stmt->bindParam(":zoekinput", $var);
+        $stmt->execute();
+        while($result = $stmt->fetch()){
+            echo '<div class="menu-item">';
+                        echo '<div class="item-left">';
+                            echo '<div class="item-txt item-name">' . $result['naam'].'</div>';
+                            echo '<div class="item-txt item-desc">' . $result['beschrijving'].'</div>';
+                        echo '</div>';
+                        echo '<div class="item-right">';
+                            echo '€ ' . $result['prijs'];
+                        echo '</div>';
+                    echo '</div>';
+            }
+        }
+
         $sql = "SELECT * FROM menu";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -52,7 +71,6 @@
                     echo '</div>';
                 }
                 ?>
-            
         </div>
     </main>
     <footer>

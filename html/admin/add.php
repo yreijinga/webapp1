@@ -6,9 +6,10 @@ include_once("../connectie.php");
  * @var PDO $pdo 
 */
 session_start();
-if(isset($_SESSION['username'])){
+if(isset($_SESSION['loginname']) && $_SESSION['loginname'] == "admin"){
+
 } else {
-    header('Location: ../login.php');
+    header('Location: index.php');
 }
 ?>
 <!DOCTYPE html>

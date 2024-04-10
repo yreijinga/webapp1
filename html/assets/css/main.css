@@ -85,10 +85,10 @@ nav{
   display: flex;
   flex-wrap: wrap; 
   width: 100%;
-  background-color: #e84a4a;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  margin-top: 50px;
 }
 .menu-item{
   display: flex;
@@ -97,6 +97,7 @@ nav{
   border: 3px solid #d3d3d3;
   border-radius: 10px;
   align-items: center;
+  margin-top: 20px;
 }
 .item-left{
   display: flex;

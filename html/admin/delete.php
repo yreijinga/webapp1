@@ -6,11 +6,11 @@ include_once("../connectie.php");
  * @var PDO $pdo 
 */
 session_start();
-if(isset($_SESSION['username'])){
-} else {
-    header('Location: ../login.php');
-}
+if(isset($_SESSION['loginname']) && $_SESSION['loginname'] == "admin"){
 
+} else {
+    header('Location: index.php');
+}
 $sql = "SELECT * FROM menu WHERE ID = :id";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(":id", $_GET['id']);
