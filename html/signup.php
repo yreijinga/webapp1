@@ -1,19 +1,21 @@
-<?php 
-    ob_start();
-    include_once("connectie.php");
-    /**
-     * @var PDO $pdo
-     */
-    session_start();
+<?php
+ob_start();
+include_once ("connectie.php");
+/**
+ * @var PDO $pdo
+ */
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registeren</title>
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
+
 <body>
     <header>
         <nav class="nav-login">
@@ -37,16 +39,17 @@
     </main>
     <footer></footer>
 </body>
+
 </html>
 <?php
-if(isset($_POST['signup'])){
-$sql = "INSERT INTO users(username, passwd, isAdmin) VALUES (:user, :passwd, :isadmin)";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(":user", $_POST['username']);
-$stmt->bindParam(":passwd", $_POST['password']);
-$stmt->bindParam(":isadmin", $_POST['isadmin']);
-$stmt->execute();
-header('Location: index.php');
-exit;
+if (isset($_POST['signup'])) {
+    $sql = "INSERT INTO users(username, passwd, isAdmin) VALUES (:user, :passwd, :isadmin)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(":user", $_POST['username']);
+    $stmt->bindParam(":passwd", $_POST['password']);
+    $stmt->bindParam(":isadmin", $_POST['isadmin']);
+    $stmt->execute();
+    header('Location: index.php');
+    exit;
 }
 ?>
