@@ -61,6 +61,14 @@ nav{
   height: 70px;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+}
+.search-form{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 .search-bar{
   display: flex;
@@ -72,7 +80,7 @@ nav{
 .search-bttn{
   display: flex;
   width: 10%;
-  height: 50px;
+  height: 53px;
   background-color: black;
   align-items: center;
   justify-content: center;

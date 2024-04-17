@@ -30,6 +30,7 @@
                     <input class="form-txt" type="text" name="username" placeholder="Gebruikersnaam">
                     <input class="form-txt" type="password" name="password" placeholder="Wachtwoord">
                     <input class="submit" type="submit" name="login" value="Login">
+                    <input class="submit" type="submit" name="signup" value="Registreren">
                 </form>
             </div>
         </div>
@@ -38,6 +39,7 @@
 </body>
 </html>
 <?php
+if(isset($_POST['login'])){
 $sql = "SELECT * FROM users WHERE username = :user AND passwd = :passwd";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(":user", $_POST['username']);
@@ -45,15 +47,17 @@ $stmt->bindParam(":passwd", $_POST['password']);
 $stmt->execute();
 $user = $stmt->fetch();
 
-if(isset($_POST['login'])){
 if($user && $user['isAdmin'] == true){
+    $_SESSION['admin'] = true;
     $_SESSION['loggedin'] = true;
-    $_SESSION['loginname'] = $_POST["username"];
     header('Location: index.php');
 } else {
+    $_SESSION['admin'] = false;
     $_SESSION['loggedin'] = true;
     header('Location: index.php');
 }
+} else if(isset($_POST['signup'])){
+    header('Location: signup.php');
 }
 
 

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +19,26 @@
             <div class="nav-a">
                 <a class="nav-link" href="index.php">Home</a>
                 <a class="nav-link" href="menu.php">Menu</a>
+                <?php
+                if(isset($_SESSION['admin']) && $_SESSION['admin'] == "true") {
+                    echo '<a class="nav-link admin-bttn" href="admin/index.php">Admin</a>';
+                    echo '<style>.admin-bttn{color: black; text-decoration: none;}</style>';
+                } else {
+                    echo '<style>.admin-bttn{display: none;}</style>';
+                }
+                ?>
             </div>
-            <div class="login-bttn">
-                <a class="redir-login" href="login.php">Login</a>
-            </div>
+            <?php 
+            if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == "true"){
+                echo '<div class="login-bttn">';
+                echo '<a class="redir-login" href="admin/logout.php">Logout</a>';
+                echo '</div>';
+            } else {
+                echo '<div class="login-bttn">';
+                echo '<a class="redir-login" href="login.php">Login</a>';
+                echo '</div>';
+            }
+            ?>
         </nav>
     </header>
     

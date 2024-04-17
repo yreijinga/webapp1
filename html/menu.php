@@ -2,6 +2,7 @@
 /**
  * @var PDO $pdo;
  */
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,40 +22,49 @@
             <div class="nav-a">
                 <a class="nav-link" href="index.php">Home</a>
                 <a class="nav-link" href="menu.php">Menu</a>
+                <?php
+                if(isset($_SESSION['admin']) && $_SESSION['admin'] == "true") {
+                    echo '<a class="nav-link admin-bttn" href="admin/index.php">Admin</a>';
+                    echo '<style>.admin-bttn{color: black; text-decoration: none;}</style>';
+                } else {
+                    echo '<style>.admin-bttn{display: none;}</style>';
+                }
+                ?>
             </div>
-            <div class="login-bttn">
-                <a class="redir-login" href="login.php">Login</a>
-            </div>
+            <?php 
+            if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == "true"){
+                echo '<div class="login-bttn">';
+                echo '<a class="redir-login" href="admin/logout.php">Logout</a>';
+                echo '</div>';
+            } else {
+                echo '<div class="login-bttn">';
+                echo '<a class="redir-login" href="login.php">Login</a>';
+                echo '</div>';
+            }
+            ?>
+            
         </nav>
     </header>
     <main>
         <div class="search-box">
-            <input class="search-bar" type="text" name="search" id="" placeholder="Zoeken...">
-            <input class="search-bttn" type="submit" name="search" value="Zoeken">
+            <form class="search-form" method="get" action="menu.php">
+                <input class="search-bar" type="text" name="search" id="" placeholder="Zoeken...">
+                <input class="search-bttn" type="submit" name="submit" value="Zoeken">
+            </form>
         </div>
         <?php
-        if(isset($_POST['search'])){
+        if(isset($_GET['submit'])){
         $searchQuery = "SELECT * FROM menu WHERE naam LIKE :zoekinput";
         $stmt = $pdo->prepare($searchQuery);
-        $var = "%" . $_GET['naam'] . "%";
+        $var = "%" . $_GET['search'] . "%";
         $stmt->bindParam(":zoekinput", $var);
         $stmt->execute();
-        while($result = $stmt->fetch()){
-            echo '<div class="menu-item">';
-                        echo '<div class="item-left">';
-                            echo '<div class="item-txt item-name">' . $result['naam'].'</div>';
-                            echo '<div class="item-txt item-desc">' . $result['beschrijving'].'</div>';
-                        echo '</div>';
-                        echo '<div class="item-right">';
-                            echo '€ ' . $result['prijs'];
-                        echo '</div>';
-                    echo '</div>';
-            }
-        }
-
+        } else {
         $sql = "SELECT * FROM menu";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
+        }
+
         ?>
         <div class="menu-list">
             <?php

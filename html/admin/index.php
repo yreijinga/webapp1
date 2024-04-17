@@ -3,10 +3,14 @@
  * @var PDO $pdo 
 */
 session_start();
-if(isset($_SESSION['loginname']) && $_SESSION['loginname'] == "admin"){
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == "true"){
+    if(isset($_SESSION['admin']) && $_SESSION['admin'] == "true"){
 
+    } else {
+        header('Location: ../index.php');
+    }
 } else {
-    header('Location: index.php');
+    header('Location: ../login.php');
 }
 ?>
 <!DOCTYPE html>
