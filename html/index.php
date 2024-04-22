@@ -45,7 +45,13 @@ session_start();
             ?>
         </nav>
     </header>
-
+    <main>
+        <div class="home-container">
+            <div class="home-title">
+                <h1>Welkom bij Cooking Mama 2!</h1>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
